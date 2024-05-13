@@ -1,0 +1,158 @@
+@startuml
+class org.example.NumberleModel {
+- String TargetWord
++ ArrayList<String> NumberList
++ int remainAttempts
++ boolean gamewon
++ boolean Flag1
++ boolean Flag2
++ boolean Flag3
++ String DefaultNumberal
+- StringBuilder CurrentGuess
++ void initialize()
++ boolean ProcessInput(String)
++ void remove()
++ void LoadList()
++ boolean processInput(String)
++ boolean isGameOver()
++ boolean isGameWon()
++ void setFlag(boolean)
++ void setFlag3(boolean)
++ void setTargetword(String)
++ String getTargetWord()
++ StringBuilder getCurrentGuess()
++ int getRemainingAttempts()
++ void setRemainingAttempts(int)
++ boolean startNewGame()
++ String DefaultWord()
+}
+
+
+class org.example.NumberleController {
+- NumberleView view
+- INumberleModel model
++ int getRemainingAttempts()
++ void startNewGame()
++ void SetFlag(Boolean)
++ void setflag1(Boolean)
++ void setFlag2(Boolean)
++ void setView(NumberleView)
++ String getTargetWord()
++ void setRemainingAttempts(int)
++ void processInput(String)
++ boolean isGameOver()
++ boolean isGameWon()
+}
+
+
+interface org.example.INumberleModel {
+~ {static} int MAX_ATTEMPTS
+~ void initialize()
+~ boolean processInput(String)
+~ boolean isGameOver()
+~ boolean isGameWon()
+~ void setFlag3(boolean)
+~ void setFlag(boolean)
+~ void setTargetword(String)
+~ String getTargetWord()
+~ StringBuilder getCurrentGuess()
+~ int getRemainingAttempts()
+~ void setRemainingAttempts(int)
+~ boolean startNewGame()
+~ String DefaultWord()
+~ void remove()
+}
+
+
+class org.example.NumberleCLI {
+- {static} String ANSI_RESET
+- {static} String ANSI_GREEN
+- {static} String ANSI_YELLOW
+- {static} String ANSI_GRAY
+- {static} INumberleModel model
+- {static} Scanner scanner
++ {static} void main(String[])
+- {static} boolean validateExpression(String)
+- {static} void playGame()
+- {static} void printCategories()
+- {static} String getInput()
+- {static} void printGameStatus()
+- {static} void printColoredInput(String,String)
+}
+NumberleCLI->NumberleModel
+
+
+class org.example.Main {
++ {static} void main(String[])
++ {static} void createAndShowGUI()
+}
+
+class org.example.Junit {
+- NumberleModel model
++ void Setup()
++ void TestNumber()
++ void testProcessInput()
++ void testRemove_EmptyGuess()
++ void testStartNewGame()
++ void testRemainingAttempts()
++ void testProcessInput_InvalidEquation()
++ void testProcessInput_InvalidInput()
+}
+
+
+class org.example.NumberleView {
+- JPanel panel
+- JLayeredPane layeredPane
+- NumberleController controller
+- INumberleModel model
++ JButton[][] button
+- JTextField inputTextField
+- int currentRow
++ {static} int ROWS
++ {static} int COLS
++ {static} int MAX_INPUT_LENGTH
+- {static} Color CORRECT_COLOR
+- {static} Color INCORRECT_COLOR
+- Color defaultColor
+- JPanel row1
+- JPanel row2
+- boolean isDarkTheme
++ void initialize()
++ void Fixed()
++ void Swap()
++ void change()
++ void Setting()
+- void updateButtonsFromTarget(char[],String)
+- void updateButtonsFromInput(String)
++ void Enter()
+- boolean validateEquation(String)
++ void clearDisplay()
++ void updateDisplay(String)
++ void TooShort()
++ void Symobol()
++ void HowtoPlayGame()
++ void NotEqual()
+- void showGameStartReminder()
++ void NoEqualSign()
++ void Youlost()
++ void Youwon()
++ void update(Observable,Object)
+}
+NumberleController->INumberleModel
+NumberleView ->NumberleController
+NumberleView ->INumberleModel
+
+
+class org.example.NumberleView$ButtonClickListener {
++ void actionPerformed(ActionEvent)
+}
+
+
+
+org.example.INumberleModel <|.. org.example.NumberleModel
+org.example.Observable <|-- org.example.NumberleModel
+java.util.Observer <|.. org.example.NumberleView
+org.example.JFrame <|-- org.example.NumberleView
+org.example.NumberleView +.. org.example.NumberleView$ButtonClickListener
+org.example.ActionListener <|.. org.example.NumberleView$ButtonClickListener
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+interface INumberleModel << interface >>
+class Junit
+class Main
+class NumberleCLI
+class NumberleController
+class NumberleModel
+class NumberleView
+
+NumberleModel       -[#008200,dashed]-^  INumberleModel     
+@enduml
